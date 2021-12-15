@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+
 import jsf.entities.User;
 
 //DAO - Data Access Object for Person entity
@@ -22,23 +23,23 @@ public class UserDAO {
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
 
-	public void create(User person) {
-		em.persist(person);
+	public void create(User user) {
+		em.persist(user);
 	}
 
-	public User merge(User person) {
-		return em.merge(person);
+	public User merge(User user) {
+		return em.merge(user);
 	}
 
-	public void remove(User person) {
-		em.remove(em.merge(person));
+	public void remove(User user) {
+		em.remove(em.merge(user));
 	}
 
 	public User find(Object id) {
 		return em.find(User.class, id);
 	}
 
-	public List<User> getFullList() {
+	public List<User> getAllUsers() {
 		List<User> list = null;
 
 		Query query = em.createQuery("select u from User u");
@@ -52,46 +53,6 @@ public class UserDAO {
 		return list;
 	}
 
-	public List<User> getList(Map<String, Object> searchParams) {
-		List<User> list = null;
 
-		// 1. Build query string with parameters
-		String select = "select p ";
-		String from = "from Person p ";
-		String where = "";
-		String orderby = "order by p.surname asc, p.name";
-
-		// search for surname
-		String surname = (String) searchParams.get("surname");
-		if (surname != null) {
-			if (where.isEmpty()) {
-				where = "where ";
-			} else {
-				where += "and ";
-			}
-			where += "p.surname like :surname ";
-		}
-		
-		// ... other parameters ... 
-
-		// 2. Create query object
-		Query query = em.createQuery(select + from + where + orderby);
-
-		// 3. Set configured parameters
-		if (surname != null) {
-			query.setParameter("surname", surname+"%");
-		}
-
-		// ... other parameters ... 
-
-		// 4. Execute query and retrieve list of Person objects
-		try {
-			list = query.getResultList();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
 
 }
