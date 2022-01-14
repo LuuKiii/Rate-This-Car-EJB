@@ -52,6 +52,29 @@ public class UserDAO {
 
 		return list;
 	}
+	
+	public List<User> userExists(String mail, String pass){
+		List<User> user = null;
+		
+		String select = "select u ";
+		String from = "from User u ";
+		String where = "where u.email like :mail and u.password like :pass ";
+		String orederby = "";
+		
+		Query query = em.createQuery(select + from + where);
+		
+		query.setParameter("mail", mail);
+		query.setParameter("pass", pass);
+		
+		try {
+			user = query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+		
+	}
 
 
 
