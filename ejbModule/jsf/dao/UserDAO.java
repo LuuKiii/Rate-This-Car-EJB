@@ -53,7 +53,37 @@ public class UserDAO {
 		return list;
 	}
 	
-	public List<User> userExists(String mail, String pass){
+	public List<User> usernameExists(String name){
+		List <User> user = null;
+		
+		Query query = em.createQuery("select u from User u where u.userName like :name");
+		query.setParameter("name", name);
+		
+		try {
+			user = query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
+	public List<User> mailExists(String mail){
+		List <User> user = null;
+		
+		Query query = em.createQuery("select u from User u where u.email like :mail");
+		query.setParameter("mail", mail);
+		
+		try {
+			user = query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
+	public List<User> canLogin(String mail, String pass){
 		List<User> user = null;
 		
 		String select = "select u ";
