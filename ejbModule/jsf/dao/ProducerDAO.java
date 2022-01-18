@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 
 import jsf.entities.Producer;
+import jsf.entities.User;
 
 //DAO - Data Access Object for Person entity
 //Designed to serve as an interface between higher layers of application and data.
@@ -52,7 +53,21 @@ public class ProducerDAO {
 
 		return list;
 	}
-
+	
+	public List<Producer> producerExists(String producer){
+		List <Producer> producerE = null;
+		
+		Query query = em.createQuery("select p from Producer p where p.producerName like :name");
+		query.setParameter("name", producer);
+		
+		try {
+			producerE = query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return producerE;
+	}
 
 
 }
