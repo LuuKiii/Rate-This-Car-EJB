@@ -6,7 +6,7 @@
 
 	<persistence-unit name="ratethiscarPU"
 		transaction-type="JTA">
-		<jta-data-source>java:/RateThisCarDS</jta-data-source>
+		<jta-data-source>java:/RateThisCar2DS</jta-data-source>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" 

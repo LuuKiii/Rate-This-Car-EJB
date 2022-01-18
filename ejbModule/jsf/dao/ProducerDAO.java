@@ -39,7 +39,7 @@ public class ProducerDAO {
 		return em.find(Producer.class, id);
 	}
 
-	public List<Producer> getAllUsers() {
+	public List<Producer> getAllProducers() {
 		List<Producer> list = null;
 
 		Query query = em.createQuery("select p from Producer p");
