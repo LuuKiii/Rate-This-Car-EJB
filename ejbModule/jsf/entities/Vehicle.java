@@ -53,7 +53,9 @@ public class Vehicle implements Serializable {
 	private List<UserRatesVehicle> userRatesVehicles;
 
 	//bi-directional many-to-one association to Producer
-	@ManyToOne
+
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "producer_idproducer")
 	private Producer producer;
 
 	public Vehicle() {
