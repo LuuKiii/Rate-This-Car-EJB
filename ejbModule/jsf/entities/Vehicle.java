@@ -10,12 +10,14 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="vehicle")
 @NamedQuery(name="Vehicle.findAll", query="SELECT v FROM Vehicle v")
 public class Vehicle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idvehicle")
 	private int idvehicle;
 
 	private String vehicleEngCap;
@@ -37,15 +39,15 @@ public class Vehicle implements Serializable {
 	private short vehicleYear;
 
 	//bi-directional many-to-one association to Car
-	@OneToMany(mappedBy="vehicle")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="vehicle")
 	private List<Car> cars;
 
 	//bi-directional many-to-one association to Motor
-	@OneToMany(mappedBy="vehicle")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="vehicle")
 	private List<Motor> motors;
 
 	//bi-directional many-to-one association to Truck
-	@OneToMany(mappedBy="vehicle")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="vehicle")
 	private List<Truck> trucks;
 
 	//bi-directional many-to-one association to UserRatesVehicle

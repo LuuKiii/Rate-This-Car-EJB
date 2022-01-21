@@ -22,7 +22,8 @@ public class Motor implements Serializable {
 	private double topSpeed;
 
 	//bi-directional many-to-one association to Vehicle
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "vehicle_idvehicle")
 	private Vehicle vehicle;
 
 	public Motor() {

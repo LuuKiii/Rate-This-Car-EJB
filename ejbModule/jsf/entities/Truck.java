@@ -22,7 +22,8 @@ public class Truck implements Serializable {
 	private String truckType;
 
 	//bi-directional many-to-one association to Vehicle
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "vehicle_idvehicle")
 	private Vehicle vehicle;
 
 	public Truck() {
