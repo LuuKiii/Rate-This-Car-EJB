@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 
 import jsf.entities.Car;
+import jsf.entities.Vehicle;
 
 //DAO - Data Access Object for Person entity
 //Designed to serve as an interface between higher layers of application and data.
@@ -43,6 +44,7 @@ public class CarDAO {
 		List<Car> list = null;
 
 		Query query = em.createQuery("select c from Car c");
+		
 
 		try {
 			list = query.getResultList();
@@ -51,6 +53,20 @@ public class CarDAO {
 		}
 
 		return list;
+	}
+	
+	public Car getOriginVeh(Vehicle vehicle) {
+		Car OriginVeh = null;
+		
+		Query query = em.createQuery("Select c from Car c where c.vehicle like :vehicle ");
+		query.setParameter("vehicle", vehicle);
+		try {
+			OriginVeh =  (Car) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return  OriginVeh;
 	}
 
 

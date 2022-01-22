@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 
 import jsf.entities.Motor;
+import jsf.entities.Vehicle;
 
 //DAO - Data Access Object for Person entity
 //Designed to serve as an interface between higher layers of application and data.
@@ -52,6 +53,21 @@ public class MotorDAO {
 
 		return list;
 	}
+	
+	public Motor getOriginVeh(Vehicle vehicle) {
+		Motor OriginVeh = null;
+		
+		Query query = em.createQuery("Select m from Motor m where m.vehicle like :vehicle ");
+		query.setParameter("vehicle", vehicle);
+		try {
+			OriginVeh =  (Motor) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return  OriginVeh;
+	}
+
 
 
 

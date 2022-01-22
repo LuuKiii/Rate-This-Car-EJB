@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
 import jsf.entities.Truck;
+import jsf.entities.Vehicle;
 
 //DAO - Data Access Object for Person entity
 //Designed to serve as an interface between higher layers of application and data.
@@ -53,6 +53,18 @@ public class TruckDAO {
 		return list;
 	}
 
-
+	public Truck getOriginVeh(Vehicle vehicle) {
+		Truck OriginVeh = null;
+		
+		Query query = em.createQuery("Select t from Truck t where t.vehicle like :vehicle ");
+		query.setParameter("vehicle", vehicle);
+		try {
+			OriginVeh =  (Truck) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return  OriginVeh;
+	}
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
+import jsf.entities.Producer;
 import jsf.entities.Vehicle;
 
 //DAO - Data Access Object for Person entity
@@ -53,6 +53,21 @@ public class VehicleDAO {
 		return list;
 	}
 
+	public List<Vehicle> getProducersVeh(Producer producer){
+		List<Vehicle> list = null;
+		
+		Query query = em.createQuery("select v from Vehicle v where v.producer like :producer");
+		query.setParameter("producer", producer);
+		
+		try {
+			list = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+		return list;
+	}
 
 
 }
