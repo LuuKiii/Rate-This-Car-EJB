@@ -51,7 +51,7 @@ public class Vehicle implements Serializable {
 	private List<Truck> trucks;
 
 	//bi-directional many-to-one association to UserRatesVehicle
-	@OneToMany(mappedBy="vehicle")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="vehicle")
 	private List<UserRatesVehicle> userRatesVehicles;
 
 	//bi-directional many-to-one association to Producer

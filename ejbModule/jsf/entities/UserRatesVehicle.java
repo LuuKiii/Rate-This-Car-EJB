@@ -33,11 +33,13 @@ public class UserRatesVehicle implements Serializable {
 	private double rateReliability;
 
 	//bi-directional many-to-one association to User
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_iduser")
 	private User user;
 
 	//bi-directional many-to-one association to Vehicle
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_idvehicle")
 	private Vehicle vehicle;
 
 	public UserRatesVehicle() {

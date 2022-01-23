@@ -8,8 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
+import jsf.entities.Car;
+import jsf.entities.User;
 import jsf.entities.UserRatesVehicle;
+import jsf.entities.Vehicle;
 
 //DAO - Data Access Object for Person entity
 //Designed to serve as an interface between higher layers of application and data.
@@ -53,6 +55,39 @@ public class UserRatesVehicleDAO {
 		return list;
 	}
 
+	public UserRatesVehicle getRating(Vehicle v, User u){
+		UserRatesVehicle rates = null;
+		
+		Query query = em.createQuery("select u from UserRatesVehicle u where u.vehicle like :vehicle and u.user like :user");
+		
+		query.setParameter("vehicle", v);
+		query.setParameter("user", u);
+		
+		try {
+			rates =   (UserRatesVehicle) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rates;
+	}
+	
+	public List <UserRatesVehicle> getRatedVeh(Vehicle v) {
+		List<UserRatesVehicle> ratedveh = null;
+		
+		Query query = em.createQuery("select u from UserRatesVehicle u where u.vehicle like :vehicle");
+		
+		query.setParameter("vehicle", v);
+		
+		try {
+			ratedveh = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ratedveh;
+	}
+	
 
 
 }

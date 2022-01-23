@@ -10,12 +10,14 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="user")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="iduser")
 	private int iduser;
 
 	private String email;
@@ -27,7 +29,7 @@ public class User implements Serializable {
 	private String userName;
 
 	//bi-directional many-to-one association to UserRatesVehicle
-	@OneToMany(mappedBy="user")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="user")
 	private List<UserRatesVehicle> userRatesVehicles;
 
 	public User() {
