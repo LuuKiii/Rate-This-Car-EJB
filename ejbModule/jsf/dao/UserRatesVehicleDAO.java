@@ -88,6 +88,22 @@ public class UserRatesVehicleDAO {
 		return ratedveh;
 	}
 	
+	public List <UserRatesVehicle> getUsersList(User u) {
+		List<UserRatesVehicle> ratedu = null;
+		
+		Query query = em.createQuery("select u from UserRatesVehicle u where u.user like :user");
+		
+		query.setParameter("user", u);
+		
+		try {
+			ratedu = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ratedu;
+	}
+	
 
 
 }
